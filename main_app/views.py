@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 class TaskView(viewsets.ViewSet):
     def create(self,request):
+        """create new task"""
         serializer = TaskSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
@@ -17,6 +18,7 @@ class TaskView(viewsets.ViewSet):
 
     
     def list(self,request):
+        """list all tasks encluding previous tasks"""
         tasks = Task.objects.all()
         serializer = TaskSerializer(tasks, many=True)
         return Response(serializer.data)
